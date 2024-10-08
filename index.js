@@ -15,10 +15,7 @@ app.use(express.json());
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 mongoose
-  .connect(
-    process.env.MONGODB_URI ||
-      "mongodb+srv://Dannyriv:N2QnQQK.MSh3-6Z@apiproducts.oeley.mongodb.net/products?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
