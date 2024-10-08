@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const { MongoClient, ServerApiVersion } = require("mongodb");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -11,15 +12,13 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB (async/await for clarity)
-(async () => {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log("MongoDB connected");
-  } catch (err) {
-    console.error(err);
-    process.exit(1); // Exit on connection error
-  }
-})(); // Immediately-Invoked Function Expression (IIFE)
+
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log(err));
 
 // Define a model (using `mongoose.model`)
 const productSchema = new mongoose.Schema({
